@@ -25,7 +25,9 @@ client.on('message', (msg) => {
     let messages = shuffle(
       nonbotUsers.map(el => `* ${el.user.username}#${el.user.discriminator}`)
     );
-    messages.push('have a good :mochi:!');
+
+    const mochi = client.emojis.find(emoji => emoji.name === 'mochi');
+    messages.push(`have a good ${mochi}!`);
     
     msg.channel.send(messages);
   }
