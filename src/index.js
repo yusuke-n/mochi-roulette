@@ -23,7 +23,7 @@ client.on('message', (msg) => {
         .filter(el => el.presence.status === 'online');
         
     let messages = shuffle(
-      nonbotUsers.map(el => `${el.user.username}#${el.user.discriminator}`)
+      nonbotUsers.map(el => `* ${el.user.username}#${el.user.discriminator}`)
     );
     messages.push('have a good :mochi:!');
     
