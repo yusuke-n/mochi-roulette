@@ -21,12 +21,13 @@ client.on('message', (msg) => {
       msg.channel.members
         .filter(el => !el.user.bot)
         .filter(el => el.presence.status === 'online');
-        
+
+    const mochi = 
+      client.emojis.find(emoji => emoji.name === 'mochi') || ':mochi:';
+          
     let messages = shuffle(
       nonbotUsers.map(el => `* ${el.user.username}#${el.user.discriminator}`)
     );
-
-    const mochi = client.emojis.find(emoji => emoji.name === 'mochi');
     messages.push(`have a good ${mochi}!`);
     
     msg.channel.send(messages);
