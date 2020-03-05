@@ -1,16 +1,25 @@
 import Discord from 'discord.js';
-import Cron from 'node-cron';
+import Cron from './cron';
+import { shuffleArray } from './util';
 
 const client = new Discord.Client();
 const token = process.env.DISCORD_TOKEN;
 
-function shuffle (array) {
-  for (let i=array.length-1; i>=0; i--) {
-    let j = Math.floor(Math.random() * (i+1));
-    [array[i], array[j]] = [array[j], array[i]];
-  }
-  return array;
-}
+const cron_param = {
+  sec: 0,
+  min: 0,
+  our: 19,
+  week: 'Fri'
+};
+
+const cron = new Cron();
+cron.schedule(cron_param, () => {
+  const channel = client.channels.find(ch => ch.name === '一般');
+  const mochi = 
+    client.emojis.find(emoji => emoji.name === 'mochi') || ':mochi:';
+  channel.send(`@everyone 明日はモチ会の日です${mochi}`);
+});
+
 
 client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}!`);
@@ -26,7 +35,7 @@ client.on('message', (msg) => {
     const mochi = 
       client.emojis.find(emoji => emoji.name === 'mochi') || ':mochi:';
           
-    let messages = shuffle(
+    let messages = shuffleArray(
       nonbotUsers.map(el => `* ${el.user.username}#${el.user.discriminator}`)
     );
     messages.push(`have a good ${mochi}!`);
@@ -34,14 +43,5 @@ client.on('message', (msg) => {
     msg.channel.send(messages);
   }
 });
-
-
-const schedule = '0 0 19 * * Fri'
-Cron.schedule(schedule, () => {
-  const channel = client.channels.find("name", "一般")
-  const mochi = 
-    client.emojis.find(emoji => emoji.name === 'mochi') || ':mochi:';
-  channel.send(`@everyone 明日はモチ会の日です${mochi}`)
-})
 
 client.login(token);
