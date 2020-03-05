@@ -1,4 +1,5 @@
 import Discord from 'discord.js';
+import Cron from 'node-cron';
 
 const client = new Discord.Client();
 const token = process.env.DISCORD_TOKEN;
@@ -33,5 +34,14 @@ client.on('message', (msg) => {
     msg.channel.send(messages);
   }
 });
+
+
+const schedule = '0 0 19 * * Fri'
+Cron.schedule(schedule, () => {
+  const channel = client.channels.find("name", "一般")
+  const mochi = 
+    client.emojis.find(emoji => emoji.name === 'mochi') || ':mochi:';
+  channel.send(`@everyone 明日はモチ会の日です${mochi}`)
+})
 
 client.login(token);
