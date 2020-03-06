@@ -40,6 +40,8 @@ export default class Cron {
     if(schedule) {
       this.syntax = this.buildCronSyntax(schedule);
     }
-    cron.schedule(this.syntax, func);
+    cron.schedule(this.syntax, func, { 
+      scheduled: true, timezone: 'Asia/Tokyo' 
+    });
   }
 }
