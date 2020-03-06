@@ -17,7 +17,7 @@
         "space-before-blocks": ["error", "always"],
         "space-before-function-paren": ["error", "always"],
         "quotes": ["error", "single"],
-        "max-len": ["error", { "code": 80 }],
+        "max-len": ["error", { "code": 90 }],
         "arrow-parens": ["error", "as-needed", {"requireForBlockBody": true}]
     }
 }
