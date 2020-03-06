@@ -8,7 +8,7 @@ const token = process.env.DISCORD_TOKEN;
 const cron_param = {
   sec: 0,
   min: 0,
-  our: 19,
+  hour: 19,
   week: 'Fri'
 };
 
