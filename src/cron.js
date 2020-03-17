@@ -1,37 +1,26 @@
 import cron from 'node-cron';
 
-const reminder_param = {
+export const reminder_param = {
   sec: 0,
-  min: 0,
-  hour: 19,
-  week: 'Fri'
+  // min: 0,
+  // hour: 19,
+  // week: 'Fri'
 };
 
-const notifier_param = {
+export const notifier_param = {
   sec: 0,
-  min: 0,
-  hour: 21,
-  week: 'Sat'
+  // min: 0,
+  // hour: 21,
+  // week: 'Sat'
 };
 
-export default class Cron {  
-  constructor (client, schedule) {
-    this.client = client;
-
+export class Cron {  
+  constructor (schedule) {
     if(typeof(schedule) !== 'object') {
       this.syntax = this.buildCronSyntax({});
     } else {
       this.syntax = this.buildCronSyntax(schedule);
     }
-
-    const channel = this.client.getChannel('一般');
-    this.schedule(reminder_param, () => {
-      channel.send(`@everyone 明日はモチ会の日です${this.client.mochiEmoji}`);
-    });
-
-    this.schedule(notifier_param, () => {
-      channel.send(`@everyone このあと22時から、モチ会があります${this.client.mochiEmoji}`);
-    });
   }
 
   buildCronSyntax (arg) {

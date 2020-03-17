@@ -1,14 +1,10 @@
-import Client from '../src/client';
+import { Client } from '../src/client';
 import Moment from 'moment';
 
 let client;
 
 beforeEach (() => {
   client = new Client();
-});
-
-test ('getUsersAndShuffle', () => {
-
 });
 
 test ('getNextSchedule', () => {

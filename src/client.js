@@ -2,7 +2,7 @@ import Discord from 'discord.js';
 import { shuffleArray } from './util';
 import Moment from 'moment';
 
-export default class Client {
+export class Client {
   constructor (token) {
     this.token = token;
     this.client = new Discord.Client();
