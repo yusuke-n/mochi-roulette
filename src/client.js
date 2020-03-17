@@ -9,7 +9,6 @@ export default class Client {
     this.client.on('ready', () => {
       console.log(`Logged in as ${this.client.user.tag}!`);
     });
-
     this.registerHandlers();
   }
 
@@ -28,9 +27,15 @@ export default class Client {
     return this.client.emojis.find(emoji => emoji.name === 'mochi') || ':mochi:';
   }
 
+  getChannel (name) {
+    return this.client.channels.find(ch => ch.name === name);
+  }
+
   login (token) {
     this.token = token;
-    this.client.login(this.token);
+    return new Promise((resolve, reject) => {
+      this.client.login(this.token).then(resolve).catch(reject);
+    });
   }
   
   /**
