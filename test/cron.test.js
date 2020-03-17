@@ -1,9 +1,11 @@
 import Cron from '../src/cron';
+import Client from '../src/client';
 
 let cron;
 
 beforeEach(() => {
-  cron = new Cron();
+  const client = new Client();
+  cron = new Cron(client);
 });
 
 test('build cron syntax', () => {
