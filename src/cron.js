@@ -1,18 +1,25 @@
 import cron from 'node-cron';
 
-export const reminder_param = {
+const every_min = {
   sec: 0,
-  min: 0,
-  hour: 19,
-  week: 'Fri'
 };
 
-export const notifier_param = {
-  sec: 0,
-  min: 0,
-  hour: 21,
-  week: 'Sat'
-};
+export const reminder_param = process.env.NODE_ENV === 'production' ? 
+  {
+    sec: 0,
+    min: 0,
+    hour: 19,
+    week: 'Fri'
+  } : every_min; 
+  
+
+export const notifier_param = process.env.NODE_ENV === 'production' ? 
+  {
+    sec: 0,
+    min: 0,
+    hour: 21,
+    week: 'Sat'
+  } : every_min;
 
 export class Cron {  
   constructor (schedule) {
