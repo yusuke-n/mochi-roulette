@@ -2,16 +2,16 @@ import cron from 'node-cron';
 
 export const reminder_param = {
   sec: 0,
-  // min: 0,
-  // hour: 19,
-  // week: 'Fri'
+  min: 0,
+  hour: 19,
+  week: 'Fri'
 };
 
 export const notifier_param = {
   sec: 0,
-  // min: 0,
-  // hour: 21,
-  // week: 'Sat'
+  min: 0,
+  hour: 21,
+  week: 'Sat'
 };
 
 export class Cron {  
