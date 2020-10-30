@@ -9,7 +9,7 @@ export const reminder_param = process.env.NODE_ENV === 'production' ?
     sec: 0,
     min: 0,
     hour: 19,
-    week: 'Fri'
+    week: 'Sat'
   } : every_min; 
   
 
@@ -18,7 +18,7 @@ export const notifier_param = process.env.NODE_ENV === 'production' ?
     sec: 0,
     min: 0,
     hour: 21,
-    week: 'Sat'
+    week: 'Sun'
   } : every_min;
 
 export class Cron {  
