@@ -6,8 +6,10 @@ const token = process.env.DISCORD_TOKEN;
 
 const cron = new Cron();
 
-client.login(token).then(() => {
-  const channel = client.getChannel('一般');
+client.login(token).then(async () => {
+  const channel = await client.getChannel(
+    process.env.NODE_ENV === 'development' ? process.env.DEV_CHANNEL_ID : process.env.PROD_CHANNEL_ID
+  );
 
   cron.schedule(reminder_param, () => {
     channel.send(`@everyone 明日はモチ会の日です${client.mochiEmoji}`);

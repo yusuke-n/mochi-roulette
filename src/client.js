@@ -24,11 +24,12 @@ export class Client {
    * クライアントが :mochi: を使用できない場合は、文字列':mochi:' を返す
    */
   get mochiEmoji () {
-    return this.client.emojis.find(emoji => emoji.name === 'mochi') || ':mochi:';
+    return this.client.emojis.cache.find(emoji => emoji.name === 'mochi') || ':mochi:';
   }
 
-  getChannel (name) {
-    return this.client.channels.find(ch => ch.name === name);
+  async getChannel (id) {
+    await this.client.channels.fetch(id);
+    return this.client.channels.cache.get(id);
   }
 
   login (token) {
@@ -73,10 +74,9 @@ export class Client {
    * @param {*} channel 
    */
   getUsersAndShuffle (channel) {
+    const cache = channel.members;
     const nonbotUsers = 
-      channel.members
-        .filter(el => !el.user.bot)
-        .filter(el => el.presence.status === 'online');
+      cache.filter(el => !el.user.bot).filter(el => el.presence.status === 'online');
             
     return shuffleArray(
       nonbotUsers.map(el => `* ${el.user.username}#${el.user.discriminator}`)
@@ -88,10 +88,10 @@ export class Client {
    */
   getNextSchedule () {
     const now = Moment();
-    let next = Moment().day(6);
+    let next = Moment().day(7);
 
-    if(now.day() === 6 && now.hour() >= 22) {
-      next = Moment().day(6+7);
+    if(now.day() === 0 && now.hour() >= 22) {
+      next = Moment().day(7+7);
     }
 
     return Moment({
