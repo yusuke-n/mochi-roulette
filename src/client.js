@@ -1,6 +1,7 @@
 import Discord from 'discord.js';
 import { shuffleArray } from './util';
 import Moment from 'moment';
+import { getNextSchedule } from './cron';
 
 export class Client {
   constructor (token) {
@@ -52,7 +53,7 @@ export class Client {
           this.sendMessage(msg.channel, msg_list);
           break;
         case '!next':
-          const format = this.getNextSchedule().format('MM/DD(ddd) HH:mm');
+          const format = getNextSchedule().format('MM/DD(ddd) HH:mm');
           let next_msg = `次回開催は ${format} です${this.mochiEmoji}`;
           this.sendMessage(msg.channel, next_msg);
           break;
@@ -81,24 +82,5 @@ export class Client {
     return shuffleArray(
       nonbotUsers.map(el => `* ${el.user.username}#${el.user.discriminator}`)
     );
-  }
-
-  /**
-   * 次回の開催予定を解決して返す
-   */
-  getNextSchedule () {
-    const now = Moment();
-    let next = Moment().day(7);
-
-    if(now.day() === 0 && now.hour() >= 22) {
-      next = Moment().day(7+7);
-    }
-
-    return Moment({
-      month: next.month(),
-      date: next.date(),
-      hour: 22,
-      minute: 0,
-    });
   }
 }

@@ -1,4 +1,5 @@
 import cron from 'node-cron';
+import Moment from 'moment';
 
 const every_min = {
   sec: 0,
@@ -20,6 +21,25 @@ export const notifier_param = process.env.NODE_ENV === 'production' ?
     hour: 21,
     week: 'Sun'
   } : every_min;
+
+/**
+* 次回の開催予定を解決して返す
+*/
+export function getNextSchedule () {
+  const now = Moment();
+  let next = Moment().day(7);
+
+  if(now.day() === 0 && now.hour() >= 22) {
+    next = Moment().day(7+7);
+  }
+
+  return Moment({
+    month: next.month(),
+    date: next.date(),
+    hour: 22,
+    minute: 0,
+  });
+}
 
 export class Cron {  
   constructor (schedule) {

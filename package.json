@@ -8,7 +8,7 @@
     "build": "babel src -d dist",
     "dev": "npm run build && cross-env NODE_ENV=development nodemon -r dotenv/config dist/index.js",
     "lint": "eslint src/index.js",
-    "test": "jest --runInBand --detectOpenHandles"
+    "test": "jest"
   },
   "author": "yusuke-n(@yamket)",
   "license": "MIT",
