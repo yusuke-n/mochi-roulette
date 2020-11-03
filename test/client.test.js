@@ -9,16 +9,16 @@ beforeEach (() => {
 
 test ('getNextSchedule', () => {
   const now = Moment();
-  let sat;
+  let sun;
   let result = client.getNextSchedule();
   if (now.hour() >= 22) {
-    sat = Moment().day(6+7);
+    sun = Moment().day(7+7);
   } else {
-    sat = Moment().day(6);
+    sun = Moment().day(7);
   }
-  expect(result.month()).toBe(sat.month());
-  expect(result.date()).toBe(sat.date());
-  expect(result.day()).toBe(6);
+  expect(result.month()).toBe(sun.month());
+  expect(result.date()).toBe(sun.date());
+  expect(result.day()).toBe(0);
   expect(result.hour()).toBe(22);
   expect(result.minute()).toBe(0);
 });
