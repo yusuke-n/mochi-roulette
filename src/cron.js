@@ -10,7 +10,7 @@ export const reminder_param = process.env.NODE_ENV === 'production' ?
     sec: 0,
     min: 0,
     hour: 19,
-    week: 'Sat'
+    week: 'Fri'
   } : every_min; 
   
 
@@ -19,7 +19,7 @@ export const notifier_param = process.env.NODE_ENV === 'production' ?
     sec: 0,
     min: 0,
     hour: 21,
-    week: 'Sun'
+    week: 'Sat'
   } : every_min;
 
 /**
