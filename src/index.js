@@ -16,6 +16,6 @@ client.login(token).then(async () => {
   });
 
   cron.schedule(notifier_param, () => {
-    channel.send(`@everyone このあと22時から、モチ会があります${client.mochiEmoji}`);
+    channel.send(`@everyone このあと21時から、モチ会があります${client.mochiEmoji}`);
   });
 });

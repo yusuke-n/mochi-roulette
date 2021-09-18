@@ -18,7 +18,7 @@ export const notifier_param = process.env.NODE_ENV === 'production' ?
   {
     sec: 0,
     min: 0,
-    hour: 21,
+    hour: 20,
     week: 'Sat'
   } : every_min;
 
@@ -29,14 +29,14 @@ export function getNextSchedule () {
   const now = Moment();
   let next = Moment().day(7);
 
-  if(now.day() === 0 && now.hour() >= 22) {
+  if(now.day() === 0 && now.hour() >= 21) {
     next = Moment().day(7+7);
   }
 
   return Moment({
     month: next.month(),
     date: next.date(),
-    hour: 22,
+    hour: 21,
     minute: 0,
   });
 }
