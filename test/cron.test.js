@@ -44,7 +44,7 @@ test ('getNextSchedule', () => {
   const now = Moment();
   let sun;
   let result = getNextSchedule();
-  if (now.hour() >= 22) {
+  if (now.hour() >= 21) {
     sun = Moment().day(7+7);
   } else {
     sun = Moment().day(7);
@@ -52,6 +52,6 @@ test ('getNextSchedule', () => {
   expect(result.month()).toBe(sun.month());
   expect(result.date()).toBe(sun.date());
   expect(result.day()).toBe(0);
-  expect(result.hour()).toBe(22);
+  expect(result.hour()).toBe(21);
   expect(result.minute()).toBe(0);
 });
